@@ -10,7 +10,7 @@
     text-align: justify;
 ">
                     <h5 class="mb-10 pt-5">Save Money</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <p class="card-text">हरेक Sunday Shopping गद्द्दा **NIBL Visa Domestic Card बाट Payment गरि पाउनुहाेस् <span style="color: red;">*15% Cash Bank.</span></p>
                 </div>
               </div>
             </div>

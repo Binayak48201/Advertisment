@@ -63,6 +63,11 @@
   -webkit-animation-delay: -1.0s;
   animation-delay: -1.0s;
 }
+@media only screen and (max-width: 801px) {
+  .media1 {
+    display: none;
+  }
+}
 /*stere*/
 @media (min-width: 992px)
 .steps__inner {
@@ -88,6 +93,7 @@
     -webkit-transform: scale(1.0);
   }
 }
+
 </style>
 </head>
 <body id="body" class="wide-layout preloader-active">

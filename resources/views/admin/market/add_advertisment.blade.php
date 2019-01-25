@@ -103,9 +103,10 @@
 					</div>
 				</div>
 				<div class="form-group">
-			    		<label class="text-primary">URL OF ANOTHER PAGE <small class="text-danger">DO NOT CHANGE THE BELOW TEXT*</small></label>
-			    	<textarea class="form-control rounded-0" name="direct" id="editor" rows="3" placeholder="Title of Page">
-			    	Visit the Page</textarea> 
+			    		<label class="text-primary">URL OF ANOTHER PAGE <small class="text-danger">Must Be An URL*</small></label>
+			    		<input type="text" name="direct"  id="defaultContactFormEmail" class="form-control mb-4" placeholder="Add_Link">
+			    	{{-- <textarea class="form-control rounded-0" name="direct" id="editor" rows="3" placeholder="Title of Page">
+			    	Visit the Page</textarea>  --}}
 			     </div>
 
 			    <!-- Send button -->

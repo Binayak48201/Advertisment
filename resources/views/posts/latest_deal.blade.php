@@ -117,13 +117,12 @@
 						</div>
 						<div class="row">
 							<div class="col-sm-12">   
-								<button class="btn btn-primary btn-lg btn-block btn btn-o" style="color: #fff;" onClick="clickme(this)" 
-								data-id="{{$adv->id}}>
-								{!!$adv->direct!!}
-								<span class="glyphicon glyphicon-new-window" 
-								style="position: absolute;
-								padding: 13px 0px 0px 69px;"></span>
-							</button>
+								 <button class="btn btn-primary btn-lg btn-block btn btn-o" style="color: #fff;" onClick="clickme(this)" 
+                data-id="{{$adv->id}}">
+                {!!$adv->direct!!}
+                <span class="glyphicon glyphicon-new-window" style="position: absolute;
+                padding: 13px 0px 0px 69px;"></span>
+            </button>
 						</div>
 					</div>
 

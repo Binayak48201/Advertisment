@@ -60,23 +60,23 @@
                     </ul>
 
                     <p class="text-muted mb-20">
-                       {{substr($adv->body, 0,50)}}
+                     {{substr($adv->body, 0,50)}}
 
-                   </p>
+                 </p>
 
-               </div>
+             </div>
 
-               <div class="deal-price pos-r mb-15">
+             <div class="deal-price pos-r mb-15">
 
                 <h2 class="price ptb-5 text-center">
 
                     <span class="price-sale">
-                     @if($adv->discount != NULL)
-                     Rs.{{$adv->str_price}}
-                     @endif
-                 </span>
+                       @if($adv->discount != NULL)
+                       Rs.{{$adv->str_price}}
+                       @endif
+                   </span>
 
-                 <span style="color:#2ed87b;">
+                   <span style="color:#2ed87b;">
                     @if($adv->discount != NULL)
                     Rs.{{$adv->price}}
                     @endif
@@ -84,16 +84,17 @@
             </h2>
         </div>
         <div class="row">
-            <div class="col-sm-12">   
-                <button class="btn btn-primary btn-lg btn-block btn btn-o" style="color: #fff;" onClick="clickme(this)" 
-                data-id="{{$adv->id}}">
-                {!!$adv->direct!!}
-                <span class="glyphicon glyphicon-new-window" style="position: absolute;
-                padding: 13px 0px 0px 69px;"></span>
-            </button>
+            <div class="col-sm-12">  
+                <a href="{!!$adv->direct!!}" class="btn btn-primary btn-lg btn-block btn btn-o" onClick="clickme(this)" data-id="{{$adv->id}}">
+                    Visit The Page
+                    <span class="glyphicon glyphicon-new-window" 
+                        style="position: absolute;
+                        padding: 13px 0px 0px 69px;">
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endforeach
 </div>

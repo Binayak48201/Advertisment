@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use App\Channel;
 use App\Advertisment;
+use App\Brand;
+use App\Carousel;
+use App\Channel;
+use App\Homecounter;
 use App\News;
 use App\Smallslider;
-use App\Carousel;
-use App\Homecounter;
-use App\Brand;
 use App\Task;
+use App\User;
+use Illuminate\Http\Request;
 class AdminController extends Controller
 {
    public function __construct()

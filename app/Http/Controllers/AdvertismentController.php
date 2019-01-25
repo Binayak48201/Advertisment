@@ -55,37 +55,8 @@ class AdvertismentController extends Controller
 
     public function latest(Request $request)
     {
-        $s = $request->input('s'); 
-        if( $request->input('filter') != NULL )
-        {
-            if($request->input('filter') == 'popular')
-            {
-                $advertisments = DB::table('advertisments')
-                ->orderBy('price', $request->input('sort'))
-                ->whereNotNull('price')
-                // ->paginate();
-                ->paginate(15);
-            }else{
-                if($request->input('filter') == 'view')
-                {
-                    $advertisments = DB::table('advertisments')
-                    ->orderBy('visits', $request->input('sort'))
-                    ->whereNotNull('visits')
-                    ->paginate(15);
-                }
-            }
-        }else{
-            if($s != '')
-            {
-                $advertisments = DB::table('advertisments')
-                                ->where('title','LIKE','%'.$s.'%')
-                                ->paginate(15); 
-            }else{
-                $advertisments = Advertisment::latest()->paginate(15);
-            }
+        $advertisments = $this->fetch($request);
 
-        }
-                     
         // $pop = $popularity->popular()->latest()->get();   
         
                 // dd($pop);      
@@ -112,41 +83,15 @@ class AdvertismentController extends Controller
 
 	public function store(Request $request)
 	{
-		  $this->validate($request,[
+         $this->validate($request, [
             'title' => 'required',
-            'channel_id'=>'required|exists:channels,id',
+            'channel_id' => 'required|exists:channels,id',
             'body' => 'required',
             'direct' => 'required',
             'adv_img' => 'required'
         ]);
 
-		    if($request->hasFile('adv_img')){
-            $filenameWithExt = $request->file('adv_img')->getClientOriginalName();
-            // Get Just Filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get Just ext
-            $extension = $request->file('adv_img')->getClientOriginalExtension();
-            // Filename To Store
-            $advertimagetostore = $filename.'_'.time().'.'.$extension;
-            // Uplopad the image
-            $path =$request->file('adv_img')->storeAs('public/cover_images', $advertimagetostore);
-        }else{
-            $advertimagetostore ='noimage.jpg';          
-        }
-         
-       $adv = Advertisment::create([
-            'title' => request('title'),
-            'channel_id' => request('channel_id'),
-            'brand_id' => request('brand_id'),
-            'body' => request('body'),
-            'place' => request('place'),
-            'discount' => request('discount'),
-            'count_down' => request('count_down'),
-            'str_price' => request('str_price'),
-            'price' => request('price'),
-            'direct' => request('direct'),
-            'adv_img' => $advertimagetostore
-        ]);
+        $this->store_advertisment($request);
         return redirect('admin/advertisement')->with('flash','Your Advertisment has been published');
 	}
 
@@ -219,5 +164,74 @@ class AdvertismentController extends Controller
         $advs = Advertisment::findOrFail($adv);
         $advs->delete(); 
         return redirect('admin/advertisement')->with('flash','Sucessfully Deleted.');
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function fetch(Request $request)
+    {
+        $s = $request->input('s');
+        if ($request->input('filter') != NULL) {
+            if ($request->input('filter') == 'popular') {
+                $advertisments = DB::table('advertisments')
+                    ->orderBy('price', $request->input('sort'))
+                    ->whereNotNull('price')
+                    // ->paginate();
+                    ->paginate(15);
+            } else {
+                if ($request->input('filter') == 'view') {
+                    $advertisments = DB::table('advertisments')
+                        ->orderBy('visits', $request->input('sort'))
+                        ->whereNotNull('visits')
+                        ->paginate(15);
+                }
+            }
+        } else {
+            if ($s != '') {
+                $advertisments = DB::table('advertisments')
+                    ->where('title', 'LIKE', '%' . $s . '%')
+                    ->paginate(15);
+            } else {
+                $advertisments = Advertisment::latest()->paginate(15);
+            }
+
+        }
+        return $advertisments;
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function store_advertisment(Request $request): void
+    {
+        if ($request->hasFile('adv_img')) {
+            $filenameWithExt = $request->file('adv_img')->getClientOriginalName();
+            // Get Just Filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get Just ext
+            $extension = $request->file('adv_img')->getClientOriginalExtension();
+            // Filename To Store
+            $advertimagetostore = $filename . '_' . time() . '.' . $extension;
+            // Uplopad the image
+            $path = $request->file('adv_img')->storeAs('public/cover_images', $advertimagetostore);
+        } else {
+            $advertimagetostore = 'noimage.jpg';
+        }
+
+        $adv = Advertisment::create([
+            'title' => request('title'),
+            'channel_id' => request('channel_id'),
+            'brand_id' => request('brand_id'),
+            'body' => request('body'),
+            'place' => request('place'),
+            'discount' => request('discount'),
+            'count_down' => request('count_down'),
+            'str_price' => request('str_price'),
+            'price' => request('price'),
+            'direct' => request('direct'),
+            'adv_img' => $advertimagetostore
+        ]);
     }
 }
