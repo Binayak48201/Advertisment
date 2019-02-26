@@ -99,7 +99,7 @@ class BrandController extends Controller
      */
     public function edit(brand $brand)
     {
-        //
+        return view('admin.brands.edit_brands',compact('brand'));
     }
 
     /**
@@ -109,9 +109,37 @@ class BrandController extends Controller
      * @param  \App\brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, brand $brand)
+    public function update(Request $request,$brand)
     {
-        //
+       $this->validate($request,[
+            'brand_name' => 'required',
+            'body' => 'required',
+            'brand_img' => 'required'
+        ]);
+
+            if($request->hasFile('brand_img')){
+            $filenameWithExt = $request->file('brand_img')->getClientOriginalName();
+            // Get Just Filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get Just ext
+            $extension = $request->file('brand_img')->getClientOriginalExtension();
+            // Filename To Store
+            $brandimagetostore = $filename.'_'.time().'.'.$extension;
+            // Uplopad the image
+            $path =$request->file('brand_img')->storeAs('public/brand_images', $brandimagetostore);
+        }else{
+            $brandimagetostore ='noimage.jpg';          
+        }
+        $brand = Brand::find($brand);
+        $brand->brand_name = $request->get('brand_name');
+        $brand->body = $request->get('body');
+
+        if($request->hasFile('brand_img')){
+            $brand->brand_img = $brandimagetostore;
+        }
+       $brand->save();
+
+        return redirect('admin/view_brands')->with('flash','Your Brand has been Updated');
     }
 
     /**

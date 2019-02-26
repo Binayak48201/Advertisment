@@ -59,8 +59,8 @@ Route::post('/add_category','ChannelController@store');
 Route::get('/view_brands','BrandController@index');
 Route::get('/add_brands','BrandController@create');
 Route::post('/add_brands','BrandController@store');
-Route::get('/edit_brands','BrandController@edit');
-Route::post('/edit_brands','BrandController@update');
+Route::get('/edit_brands/{brand}','BrandController@edit');
+Route::post('/edit_brands/{brand}','BrandController@update');
 Route::delete('/delete_brands','BrandController@destroy');
 // News Admins
 Route::get('/view_admin','RegistrationController@index');

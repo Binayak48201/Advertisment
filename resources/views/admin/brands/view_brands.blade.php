@@ -39,7 +39,7 @@
                                                     <td><img src="/storage/brand_images/{{$brand->brand_img}}" alt="" style="width: 60px;">
                                                     </td>
                                                     <td style="display: flex;">
-                                                        <a href="{{action('BrandController@edit', $brand->id)}}">
+                                                        <a href="/admin/edit_brands/{{$brand->id}}">
                                                             <button type="button" class="btn btn-outline-success btn-rounded waves-effect" >Edit</button>
                                                         </a>
                                                         <form action="/admin/delete_brand/{{$brand->id}}" method="POST"
